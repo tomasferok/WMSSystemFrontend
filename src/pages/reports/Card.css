@@ -1,0 +1,9 @@
+.card-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .card-container ion-card {
+    max-width: 200px;
+    text-align: center;
+  }
