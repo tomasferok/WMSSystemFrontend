@@ -29,6 +29,9 @@ import AlmacenamientoList from './pages/almacenamientos/AlmacenamientoList';
 import AlmacenamientoEdit from './pages/almacenamientos/AlmacenamientoEdit';
 import CarritoEdit from './pages/carrito/CarritoEdit';
 import VentasReport from './pages/reports/VentasReport';
+import RecepcionList from './pages/recepciones/RecepcionList';
+import RecepcionEdit from './pages/recepciones/RecepcionEdit';
+import ProductosPendientesList from './pages/products/ProductosPendientesList';
 
 
 setupIonicReact();
@@ -48,7 +51,6 @@ const App: React.FC = () => {
             <Route path="/page/products" exact={true}>
               <ProductList />
               </Route>
-              
               <Route path="/page/product/:id" exact={true}>
               <ProductEdit />
               </Route>
@@ -66,10 +68,21 @@ const App: React.FC = () => {
               </Route>
               <Route path="/page/alma/:id" exact={true}>
                 <AlmacenamientoEdit/>
-              
               </Route>
               <Route path="/page/ventas" exact={true}>
               <VentasReport />
+              </Route>
+              <Route path="/page/recepciones" exact={true}>
+              <RecepcionList />
+              </Route>
+              <Route path="/page/recepciones/:id" exact={true}>
+              <RecepcionEdit />
+              </Route>
+              <Route path="/page/productos/pendiente" exact={true}>
+              <ProductosPendientesList />
+              </Route>
+              <Route path="/page/controlarRecepcion/:id" exact={true}>
+              <ProductosPendientesList />
               </Route>
           </IonRouterOutlet>
         </IonSplitPane>

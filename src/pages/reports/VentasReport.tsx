@@ -7,8 +7,8 @@ import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale } from 'chart.js';
 import ProductosEnVenta from './ProductosEnVenta';
 import LinesChart from './GraphicsComponent/LinesChar';
-import Card from './GraphicsComponent/card';
 import './Card.css';
+import Card from './GraphicsComponent/Card';
 const VentasReport: React.FC = () => {
  
 

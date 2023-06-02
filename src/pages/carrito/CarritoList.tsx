@@ -57,11 +57,6 @@ const CarritoList: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-
-
-
-
-
         <IonContent>
           <IonCard>
             <IonTitle>Carrito Managment</IonTitle>
