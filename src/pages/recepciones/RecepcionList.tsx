@@ -30,6 +30,8 @@ const RecepcionList: React.FC = () => {
     }
     const controlarRecepcion = (id:string)=>{
 
+      history.push('/page/controlarRecepcion/'+ id);
+
     }
   
     const editRecep = (id: string) => {

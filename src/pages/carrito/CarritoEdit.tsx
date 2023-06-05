@@ -124,7 +124,7 @@ const CarritoEdit: React.FC = () => {
       <IonHeader>
         
         <IonToolbar>
-        <IonText className=''>errre</IonText>
+        <IonText className=''>Carrito de Compras</IonText>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
