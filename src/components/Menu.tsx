@@ -58,8 +58,8 @@ const compras:AppPage[]=[
     mdIcon: handLeftSharp
   },
   {
-    title: 'Proovedores',
-    url: '/page/prooverdores',
+    title: 'Proveedores',
+    url: '/page/proveedores',
     iosIcon: peopleOutline,
     mdIcon: peopleSharp
   }

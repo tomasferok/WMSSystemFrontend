@@ -19,7 +19,7 @@ const ComboBoxRecepcion: React.FC<ComboBoxProps> = ({ recepcion, onSelect }) => 
 
   return (
     <IonSelect value={selectedRecepId} placeholder="Seleccionar una recepcion" onIonChange={handleRecepSelect}>
-      {recepcion.map((recep) => (
+      {recepcion?.map((recep) => (
         <IonSelectOption key={recep.idRecep} value={recep.idRecep}>
           {recep.idRecep}
         </IonSelectOption>

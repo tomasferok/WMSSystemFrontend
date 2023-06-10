@@ -6,10 +6,13 @@ import { add, checkmark, close, save } from "ionicons/icons";
 import Product from "../products/Product";
 import { saveProduct } from "../products/ProductApi";
 import { saveRecep } from "./recepcionApi";
+import Proveedor from "../proveedores/Proveedor";
+import { searchProv } from "../proveedores/ProvApi";
+import ComboBoxProveedores from "../proveedores/ComboBoxProveedores";
 
 const RecepcionEdit: React.FC = () => {
   const { name } = useParams<{ name: string; }>();
-  const [inputFields, setInputFields] = useState<JSX.Element[]>([]);
+  const [provs, setProvs] = useState<Proveedor[]>([]);
   const [product, setProduct] = useState<Product[]>([]);
   const [searchText, setSearchText] = useState('');
   const [amountValue, setAmountValue] = useState('');
@@ -21,7 +24,7 @@ const RecepcionEdit: React.FC = () => {
   const id = routeMatch?.params?.id;
 
   useEffect(() => {
-    
+    chargeProvs();
 
   }, [history.location.pathname]);
   const addInput = async (e) => {
@@ -50,7 +53,14 @@ const RecepcionEdit: React.FC = () => {
     setPriceValue('');
 
   }
+  const chargeProvs = async()=>{
 
+    let result = await searchProv();
+    setProvs(result);
+  }
+const findByIdProv = ()=>{
+
+}
   const save = async () => {
     let e:Recepcion;
     e = {
@@ -79,7 +89,10 @@ const RecepcionEdit: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-
+        <IonRow>
+          <IonText color={'danger'}>Proveedor Seleccionado:</IonText>
+          <ComboBoxProveedores proveedor={provs} onSelect={findByIdProv}></ComboBoxProveedores>
+        </IonRow>
         <IonContent>
           <IonCard>
             <IonTitle>{id === 'new' ? 'Agregar Productos a Recepcion' : 'Editar '}</IonTitle>

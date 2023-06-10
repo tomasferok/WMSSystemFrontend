@@ -9,7 +9,7 @@ padding-left: 12px;
 }
 ion-menu.md ion-content {
   --padding-start: 8px;
-  --padding-end: 8px;
+  --padding-end: 0px;
   --padding-top: 20px;
   --padding-bottom: 20px;
   --ion-background-color: #f10c0c
