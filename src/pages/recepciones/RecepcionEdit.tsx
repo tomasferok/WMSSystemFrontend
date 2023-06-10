@@ -58,7 +58,7 @@ const RecepcionEdit: React.FC = () => {
     let result = await searchProv();
     setProvs(result);
   }
-const findByIdProv = ()=>{
+const findByIdProv = (idProd: string)=>{
 
 }
   const save = async () => {

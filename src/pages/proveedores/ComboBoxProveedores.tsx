@@ -7,7 +7,7 @@ import Proveedor from './Proveedor';
 
 interface ComboBoxProps {
   proveedor: Proveedor[];
-  onSelect: (documento: number) => void;
+  onSelect: (idProv: string) => void;
 }
 
 const ComboBoxProveedores: React.FC<ComboBoxProps> = ({ proveedor, onSelect }) => {
