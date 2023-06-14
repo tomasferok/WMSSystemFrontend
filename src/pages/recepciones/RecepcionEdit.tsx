@@ -4,20 +4,22 @@ import Recepcion from "./Recepcion";
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonPage, IonPopover, IonRow, IonText, IonTitle, IonToolbar } from "@ionic/react";
 import { add, checkmark, close, save } from "ionicons/icons";
 import Product from "../products/Product";
-import { saveProduct } from "../products/ProductApi";
 import { saveRecep } from "./recepcionApi";
 import Proveedor from "../proveedores/Proveedor";
-import { searchProv } from "../proveedores/ProvApi";
+import { searchProv, searchProvById } from "../proveedores/ProvApi";
 import ComboBoxProveedores from "../proveedores/ComboBoxProveedores";
+import Almacenamiento from "../almacenamientos/Almacenamiento";
 
 const RecepcionEdit: React.FC = () => {
   const { name } = useParams<{ name: string; }>();
   const [provs, setProvs] = useState<Proveedor[]>([]);
+  const [mostrarProv, setMostrarProv]= useState<boolean>(false);
+  const [prov, setProv] = useState<Proveedor>({});
   const [product, setProduct] = useState<Product[]>([]);
   const [searchText, setSearchText] = useState('');
   const [amountValue, setAmountValue] = useState('');
   const [priceValue, setPriceValue] = useState('');
-  const [recepcion, setRecepcion] = useState<Recepcion>({});
+  const [alma, setAlma] = useState<Almacenamiento>({});
   const history = useHistory();
 
   const routeMatch: any = useRouteMatch("/page/recepciones/:id");
@@ -43,7 +45,8 @@ const RecepcionEdit: React.FC = () => {
         amount:Number(amountValue),
         nameProd:searchText,
         price:Number(priceValue),
-        state:"PENDIENTE"
+        state:"PENDIENTE",
+        idAlma: Number(alma.id)
       }]);
       
     }
@@ -58,14 +61,18 @@ const RecepcionEdit: React.FC = () => {
     let result = await searchProv();
     setProvs(result);
   }
-const findByIdProv = (idProd: string)=>{
+const findByIdProv = async(idProv: string)=>{
 
+    let result = await searchProvById(idProv);
+    setProv(result);
+    setMostrarProv(true);
 }
   const save = async () => {
     let e:Recepcion;
     e = {
       listaProds:product,
-      estadoRecep:"PENDIENTE"
+      estadoRecep:"PENDIENTE",
+      proveedor: prov
     }
     await saveRecep(e);
     history.push('/page/products');
@@ -90,9 +97,26 @@ const findByIdProv = (idProd: string)=>{
           </IonToolbar>
         </IonHeader>
         <IonRow>
-          <IonText color={'danger'}>Proveedor Seleccionado:</IonText>
+         
           <ComboBoxProveedores proveedor={provs} onSelect={findByIdProv}></ComboBoxProveedores>
+          
+          {mostrarProv && (
+                  <IonGrid className="table">
+                    <IonText color={'danger'}>Proveedor Seleccionado:</IonText>
+                    <IonRow>
+                      <IonCol color="tertiary">Nombre</IonCol>
+                      <IonCol color="tertiary">Documento</IonCol>
+                      <IonCol color="tertiary">E-Mail</IonCol>
+                    </IonRow>
+                    <IonRow>
+                      <IonCol color="tertiary">{prov.nombreProv}</IonCol>
+                      <IonCol color="tertiary">{prov.documento}</IonCol>
+                      <IonCol color="tertiary">{prov.email}</IonCol>
+                    </IonRow>
+                  </IonGrid>
+              )}
         </IonRow>
+        
         <IonContent>
           <IonCard>
             <IonTitle>{id === 'new' ? 'Agregar Productos a Recepcion' : 'Editar '}</IonTitle>
@@ -100,26 +124,16 @@ const findByIdProv = (idProd: string)=>{
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">NameProd
-                  </IonLabel>
-
-                  <IonInput value={searchText} onIonChange={(e) => setSearchText(e.detail.value)}
-                  >
-                  </IonInput>
-
+                  <IonLabel position="stacked">NameProd </IonLabel>
+                  <IonInput value={searchText} onIonChange={(e) => setSearchText(e.detail.value)}/>
                 </IonItem>
               </IonCol>
-
             </IonRow>
-
-          
-
             <IonRow>
               <IonCol>
                 <IonItem>
                   <IonLabel position="stacked">Precio</IonLabel>
-                  <IonInput value={priceValue} onIonChange={(e) => setPriceValue(e.detail.value)}>
-                  </IonInput>
+                  <IonInput value={priceValue} onIonChange={(e) => setPriceValue(e.detail.value)}/>
                 </IonItem>
               </IonCol>
             </IonRow>
@@ -127,8 +141,15 @@ const findByIdProv = (idProd: string)=>{
               <IonCol>
                 <IonItem>
                   <IonLabel position="stacked">Cantidad</IonLabel>
-                  <IonInput value={amountValue} onIonChange={(e) => setAmountValue(e.detail.value)}>
-                  </IonInput>
+                  <IonInput value={amountValue} onIonChange={(e) => setAmountValue(e.detail.value)}/>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonLabel position="stacked">IdAlmacenamiento</IonLabel>
+                  <IonInput value={alma.id} onIonChange={(e) => setAlma({id:e.detail.value})}/>
                 </IonItem>
               </IonCol>
             </IonRow>

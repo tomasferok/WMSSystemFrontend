@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, cubeSharp, cubeOutline, folderOpenSharp, folderOpenOutline, cardOutline, cardSharp, cartSharp, statsChartOutline, statsChartSharp, contractOutline, contractSharp, peopleCircleOutline, peopleCircleSharp, serverOutline, albumsOutline, albumsSharp, peopleOutline, peopleSharp, handLeftOutline, handLeftSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, cubeSharp, cubeOutline, folderOpenSharp, folderOpenOutline, cardOutline, cardSharp, cartSharp, statsChartOutline, statsChartSharp, contractOutline, contractSharp, peopleCircleOutline, peopleCircleSharp, serverOutline, albumsOutline, albumsSharp, peopleOutline, peopleSharp, handLeftOutline, handLeftSharp, barcodeOutline, barcodeSharp } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -62,6 +62,12 @@ const compras:AppPage[]=[
     url: '/page/proveedores',
     iosIcon: peopleOutline,
     mdIcon: peopleSharp
+  },
+  {
+    title: 'Etiquetas',
+    url: '/page/barcode',
+    iosIcon: barcodeOutline,
+    mdIcon: barcodeSharp
   }
 ];
 

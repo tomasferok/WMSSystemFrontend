@@ -34,6 +34,7 @@ import RecepcionEdit from './pages/recepciones/RecepcionEdit';
 import ProductosPendientesList from './pages/products/ProductosPendientesList';
 import ControlarRecepcion from './pages/recepciones/ControlarRecepcion';
 import ProvList from './pages/proveedores/ProvList';
+import GeterarEtiqueta from './pages/products/GenerarEtiquetas';
 
 
 setupIonicReact();
@@ -88,6 +89,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/page/proveedores" exact={true}>
               <ProvList />
+              </Route>
+              <Route path="/page/barcode" exact={true}>
+              <GeterarEtiqueta />
               </Route>
           </IonRouterOutlet>
         </IonSplitPane>

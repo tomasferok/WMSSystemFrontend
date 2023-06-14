@@ -49,3 +49,39 @@ export async function saveProduct(product:Product){
     
   
 }
+
+export async function searchProductByAlmaId(id: string) {
+  let url = REACT_APP_API + 'productosbyAlmaid/' + id
+  let response = await fetch(url, {
+    "method": 'GET',
+    "headers": {
+      "Content-Type": 'application/json'
+    }
+  })
+
+  return await response.json();
+}
+
+export async function generarEtiqueta(product:Product[]){
+
+  let url = REACT_APP_API + 'barcodes'
+let response = await fetch(url, {
+  "method": 'POST',
+  "body": JSON.stringify(product),
+  "headers": {
+    "Content-Type": 'application/json'
+  }
+}).then((response) => response.blob())
+.then((blob) => {
+  // Obtiene la URL del objeto Blob
+  const url = URL.createObjectURL(blob);
+
+  // Abre el PDF en una nueva pestaña
+  window.open(url);
+})
+.catch((error) => {
+  console.error('Error al obtener el PDF:', error);
+});
+
+
+}
