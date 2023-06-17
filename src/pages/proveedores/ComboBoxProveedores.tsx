@@ -20,7 +20,7 @@ const ComboBoxProveedores: React.FC<ComboBoxProps> = ({ proveedor, onSelect }) =
   };
 
   return (
-    <IonSelect value={selectedProvId} placeholder="Seleccionar un proveedor" onIonChange={handleprovSelect}>
+    <IonSelect className='comboboxProvs' value={selectedProvId} placeholder="Seleccionar un proveedor" onIonChange={handleprovSelect}>
       {proveedor?.map((prov) => (
         <IonSelectOption key={prov.idProv} value={prov.idProv}>
           {prov.documento}

@@ -1,0 +1,42 @@
+/* RecepcionList.css */
+
+/* Estilos para el header */
+ion-button.comboProvs {
+    --background: #fd3a3a; /* Fondo rojo */
+    --color: #ffffff; /* Texto en color blanco */
+    align-items: center;
+  }
+ion-header {
+    --ion-background-color: #616161; /* Fondo gris oscuro */
+  }
+  
+  /* Estilos para el contenido */
+  ion-content {
+    --ion-background-color: #f1f1f1; /* Fondo gris claro */
+  }
+  
+  /* Estilos para el título */
+  ion-header ion-title {
+    color: #ffffff; /* Texto en color rojo */
+  }
+  
+  /* Estilos para el botón "Agregar Recepcion" */
+  ion-button.add-recepcion {
+    --background: #fd3a3a; /* Fondo rojo */
+    --color: #ffffff; /* Texto en color blanco */
+  }
+  
+  /* Estilos para las filas de la tabla */
+  .ion-row {
+    animation: fade-in 0.3s ease-in-out; /* Animación de aparición suave */
+  }
+  
+  /* Animación de aparición suave */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

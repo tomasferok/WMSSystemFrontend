@@ -1,125 +1,117 @@
-import { useEffect, useState } from "react";
-import Recepcion from "./Recepcion";
-import { useHistory, useParams } from "react-router";
-import { removeRecepcion, searchRecepcion } from "./recepcionApi";
-import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { add, checkmarkDoneCircleSharp, close, pencil } from "ionicons/icons";
+import React, { useState, useEffect } from 'react';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonItem,
+  IonButton,
+  IonIcon,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from '@ionic/react';
+import { add, pencil, close, checkmarkDoneCircleSharp } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
+import './Recepcion.css';
+import { removeRecepcion, searchRecepcion } from './recepcionApi';
+
+interface Recepcion {
+  idRecep: string;
+  estadoRecep: string;
+}
 
 const RecepcionList: React.FC = () => {
+  const [recepcion, setRecepcion] = useState<Recepcion[]>([]);
 
-    const [recepcion, setRecepcion] = useState<Recepcion[]>([]);
-    const { name } = useParams<{ name: string; }>();
-    const history = useHistory();
-    useEffect(() => {
-      search();
-    }, [history.location.pathname]);
-    const search = async () => {
-      let result = await searchRecepcion();
-      setRecepcion(result);
-    }
-  
-    const remove = async (id: string) => {
-      await removeRecepcion(id);
-      search();
-    }
-  
-  
-  
-    const addRecep = () => {
-      history.push('/page/recepciones/new');
-    }
-    const controlarRecepcion = (id:string)=>{
+  const history = useHistory();
 
-      history.push('/page/controlarRecepcion/'+ id);
+  useEffect(() => {
+    search();
+  }, [history.location.pathname]);
 
-    }
-  
-    const editRecep = (id: string) => {
-      history.push('/page/recep/' + id);
-    }
-  
-    
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle>{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-  
-        <IonContent fullscreen>
-          <IonHeader collapse="condense">
-            <IonToolbar>
-              <IonTitle size="large">{name}</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-  
-  
-  
-  
-  
-          <IonContent>
-            <IonCard>
-              <IonTitle>Recepcion Managment</IonTitle>
-  
-              <IonItem>
-                <IonButton onClick={addRecep} color="primary" fill="solid" slot="end" size="default">
-                  <IonIcon icon={add} />
-                  Agregar Recepcion
-                </IonButton>
-              </IonItem>
-  
-              <IonGrid className="table">
-                <IonRow>
-                  <IonCol>Id</IonCol>
-                  <IonCol>Estado</IonCol>
-                  <IonCol>Acciones</IonCol>
-  
-                </IonRow>
-  
-                {recepcion.map((recep: Recepcion) =>
-                  <IonRow>
-                    <IonCol>{recep.idRecep}</IonCol>
-                    <IonCol>{recep.estadoRecep}</IonCol>
-  
-                    <IonCol>
-                      <IonButton color="primary" fill="clear" onClick={() => editRecep(String(recep.idRecep))}
-                      >
-                        <IonIcon icon={pencil} slot="icon-only" />
-                      </IonButton>
-                      <IonButton color="danger" fill="clear"
-                        onClick={() => remove(String(recep.idRecep))}>
-                        <IonIcon icon={close} slot="icon-only" />
-                      </IonButton>
-                      <IonButton color="secondary" fill="clear"
-                        onClick={() => controlarRecepcion(String(recep.idRecep))}>
-                          Controlar
-                        <IonIcon icon={checkmarkDoneCircleSharp} slot="icon-only" />
-                      </IonButton>
-  
-                    </IonCol>
-                  </IonRow>
-                )}
-  
-  
-  
-              </IonGrid>
-            </IonCard>
-  
-  
-          </IonContent>
-  
-  
-  
-  
-  
-  
-        </IonContent>
-      </IonPage>
-    );
+  const search = async () => {
+    const result = await searchRecepcion();
+    setRecepcion(result);
   };
 
-  export default RecepcionList;
+  const remove = async (id: string) => {
+    await removeRecepcion(id);
+    search();
+  };
+
+  const addRecep = () => {
+    history.push('/page/recepciones/new');
+  };
+
+  const controlarRecepcion = (id: string) => {
+    history.push(`/page/controlarRecepcion/${id}`);
+  };
+
+  const editRecep = (id: string) => {
+    history.push(`/page/recep/${id}`);
+  };
+
+  const renderRecepcionRows = () => {
+    return recepcion.map((recep: Recepcion) => (
+      <IonRow key={recep.idRecep}>
+        <IonCol>{recep.idRecep}</IonCol>
+        <IonCol>{recep.estadoRecep}</IonCol>
+        <IonCol>
+          <IonButton color="primary" fill="clear" onClick={() => editRecep(String(recep.idRecep))}>
+            <IonIcon icon={pencil} slot="icon-only" />
+          </IonButton>
+          <IonButton color="danger" fill="clear" onClick={() => remove(String(recep.idRecep))}>
+            <IonIcon icon={close} slot="icon-only" />
+          </IonButton>
+          <IonButton color="success" fill="clear" onClick={() => controlarRecepcion(String(recep.idRecep))}>
+            Controlar
+            <IonIcon icon={checkmarkDoneCircleSharp} slot="icon-only" />
+          </IonButton>
+        </IonCol>
+      </IonRow>
+    ));
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Recepciones</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent fullscreen>
+        <IonCard>
+          <IonTitle>Maestro de Recepciones</IonTitle>
+
+          <IonItem>
+            <IonButton className="add-recepcion" onClick={addRecep} fill="solid" slot="end" size="default">
+              <IonIcon icon={add} />
+              Agregar Recepcion
+            </IonButton>
+          </IonItem>
+
+          <IonGrid className="table">
+            <IonRow>
+              <IonCol>Id</IonCol>
+              <IonCol>Estado</IonCol>
+              <IonCol>Acciones</IonCol>
+            </IonRow>
+
+            {renderRecepcionRows()}
+          </IonGrid>
+        </IonCard>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default RecepcionList;

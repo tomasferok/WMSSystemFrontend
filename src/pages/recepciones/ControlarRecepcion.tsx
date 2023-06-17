@@ -15,7 +15,7 @@ const ControlarRecepcion: React.FC = () => {
   const [controlado, setControlado] = useState(false);
   const [listProds, setListProds] = useState<Product[]>([]);
   const [showPopover, setShowPopover] = useState(false);
-  const { name } = useParams<{ name: string; }>();
+  
   const history = useHistory();
   const routeMatch: any = useRouteMatch("/page/controlarRecepcion/:id");
   const id = routeMatch?.params?.id;
@@ -23,6 +23,7 @@ const ControlarRecepcion: React.FC = () => {
   useEffect(() => {
     searchById();
     searchRecepcions();
+    
   }, [history.location.pathname]);
   const searchById = async () => {
     setControlado(false);
@@ -48,14 +49,15 @@ const ControlarRecepcion: React.FC = () => {
     setRecepcions(result);
   }
 
-  const chargeRequest = (prodName: string, requestAmount: string, id: string, price: number) => {
+  const chargeRequest = (prodName: string, requestAmount: string, id: string, price: number, almaId:number) => {
 
     setListProds([...listProds, {
       idProd: id,
       nameProd: prodName,
       amount: Number(requestAmount),
       price: price,
-      state: "PENDIENTE"
+      state: "PENDIENTE",
+      idAlma: almaId
     }])
 
   }
@@ -74,8 +76,10 @@ const ControlarRecepcion: React.FC = () => {
     let response = await controlarRecep(request);
     if (response.Recepcion.estadoRecep == "DIFERENCIAS") {
       confirmation();
+      setListProds(null);
     } else {
       history.push('/page/recepciones');
+      setListProds(null);
     }
 
 
@@ -113,7 +117,7 @@ const confirmSaveWithDifer = async() =>{
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
+            <IonTitle size="large">Control</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonRow>
@@ -128,6 +132,7 @@ const confirmSaveWithDifer = async() =>{
               <IonRow>
                 <IonCol>Nombre</IonCol>
                 <IonCol>Precio</IonCol>
+                <IonCol>Almacenamiento</IonCol>
                 <IonCol>CantidadEnRecpcion</IonCol>
                 <IonCol>CantidadEsperada</IonCol>
               </IonRow>
@@ -136,8 +141,9 @@ const confirmSaveWithDifer = async() =>{
                 <IonRow>
                   <IonCol>{producto.nameProd}</IonCol>
                   <IonCol>{producto.price}</IonCol>
+                  <IonCol>{producto.idAlma}</IonCol>
                   <IonCol>{producto.amount}</IonCol>
-                  <IonCol><IonInput placeholder='Ingresar cantidad esperada' onIonChange={e => { chargeRequest(producto.nameProd, String(e.target.value), producto.idProd, producto.price) }}></IonInput></IonCol>
+                  <IonCol><IonInput placeholder='Ingresar cantidad esperada' onIonChange={e => { chargeRequest(producto.nameProd, String(e.target.value), producto.idProd, producto.price, producto.idAlma) }}></IonInput></IonCol>
 
                 </IonRow>
               )}

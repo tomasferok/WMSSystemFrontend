@@ -9,6 +9,7 @@ import Proveedor from "../proveedores/Proveedor";
 import { searchProv, searchProvById } from "../proveedores/ProvApi";
 import ComboBoxProveedores from "../proveedores/ComboBoxProveedores";
 import Almacenamiento from "../almacenamientos/Almacenamiento";
+import { useForm } from "react-hook-form";
 
 const RecepcionEdit: React.FC = () => {
   const { name } = useParams<{ name: string; }>();
@@ -19,10 +20,12 @@ const RecepcionEdit: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [amountValue, setAmountValue] = useState('');
   const [priceValue, setPriceValue] = useState('');
+  const [error, setError] = useState('');
   const [alma, setAlma] = useState<Almacenamiento>({});
   const history = useHistory();
 
   const routeMatch: any = useRouteMatch("/page/recepciones/:id");
+
   const id = routeMatch?.params?.id;
 
   useEffect(() => {
@@ -30,6 +33,23 @@ const RecepcionEdit: React.FC = () => {
 
   }, [history.location.pathname]);
   const addInput = async (e) => {
+    if (searchText.trim() === '') {
+      setError('NameProd field cannot be empty');
+      return;
+    }
+    if (priceValue.trim() === '') {
+      setError('Precio field cannot be empty');
+      return;
+    }
+    if (amountValue.trim() === '') {
+      setError('Cantidad field cannot be empty');
+      return;
+    }
+    if (alma.id.trim() === '') {
+      setError('Cantidad field cannot be empty');
+      return;
+    }
+    
     e.preventDefault();
     let enter;
     product?.map((f)=>{
@@ -54,7 +74,7 @@ const RecepcionEdit: React.FC = () => {
     setSearchText('');
     setAmountValue('');
     setPriceValue('');
-
+    setAlma({});
   }
   const chargeProvs = async()=>{
 
@@ -82,7 +102,7 @@ const findByIdProv = async(idProv: string)=>{
       <IonHeader>
 
         <IonToolbar>
-          <IonText className=''>Recepciones</IonText>
+        <IonTitle>Crear Recepcion</IonTitle>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
@@ -97,9 +117,9 @@ const findByIdProv = async(idProv: string)=>{
           </IonToolbar>
         </IonHeader>
         <IonRow>
-         
+         <IonButton className="comboProvs">
           <ComboBoxProveedores proveedor={provs} onSelect={findByIdProv}></ComboBoxProveedores>
-          
+          </IonButton>
           {mostrarProv && (
                   <IonGrid className="table">
                     <IonText color={'danger'}>Proveedor Seleccionado:</IonText>
@@ -124,8 +144,8 @@ const findByIdProv = async(idProv: string)=>{
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">NameProd </IonLabel>
-                  <IonInput value={searchText} onIonChange={(e) => setSearchText(e.detail.value)}/>
+                  <IonLabel position="stacked">NameProd </IonLabel> 
+                  <IonInput placeholder="Se debe ingresar un nombre" value={searchText} onIonChange={(e) => setSearchText(e.detail.value)}/>
                 </IonItem>
               </IonCol>
             </IonRow>
@@ -133,7 +153,7 @@ const findByIdProv = async(idProv: string)=>{
               <IonCol>
                 <IonItem>
                   <IonLabel position="stacked">Precio</IonLabel>
-                  <IonInput value={priceValue} onIonChange={(e) => setPriceValue(e.detail.value)}/>
+                  <IonInput placeholder="Se debe ingresar un precio" value={priceValue} onIonChange={(e) => setPriceValue(e.detail.value)}/>
                 </IonItem>
               </IonCol>
             </IonRow>
@@ -141,7 +161,7 @@ const findByIdProv = async(idProv: string)=>{
               <IonCol>
                 <IonItem>
                   <IonLabel position="stacked">Cantidad</IonLabel>
-                  <IonInput value={amountValue} onIonChange={(e) => setAmountValue(e.detail.value)}/>
+                  <IonInput placeholder="Se debe ingresar una cantidad" value={amountValue} onIonChange={(e) => setAmountValue(e.detail.value)}/>
                 </IonItem>
               </IonCol>
             </IonRow>
@@ -149,11 +169,11 @@ const findByIdProv = async(idProv: string)=>{
               <IonCol>
                 <IonItem>
                   <IonLabel position="stacked">IdAlmacenamiento</IonLabel>
-                  <IonInput value={alma.id} onIonChange={(e) => setAlma({id:e.detail.value})}/>
+                  <IonInput placeholder="Se debe ingresar un almacenamiento" value={alma.id} onIonChange={(e) => setAlma({id:e.detail.value})}/>
                 </IonItem>
               </IonCol>
             </IonRow>
-
+            {error && <div className="error-message">{error}</div>}
             <IonItem>
               <IonButton onClick={addInput} color="tertiary" fill="solid" slot="end" size="default">
                 <IonIcon icon={add} />
