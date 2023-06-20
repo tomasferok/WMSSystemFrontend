@@ -13,7 +13,6 @@ const ControlarRecepcion: React.FC = () => {
   const [recepcion, setRecepcion] = useState<Recepcion>({});
   const [recepcions, setRecepcions] = useState<Recepcion[]>([]);
   const [controlado, setControlado] = useState(false);
-  const [listProds, setListProds] = useState<Product[]>([]);
   const [showPopover, setShowPopover] = useState(false);
   
   const history = useHistory();
@@ -49,21 +48,9 @@ const ControlarRecepcion: React.FC = () => {
     setRecepcions(result);
   }
 
-  const chargeRequest = (prodName: string, requestAmount: string, id: string, price: number, almaId:number) => {
-
-    setListProds([...listProds, {
-      idProd: id,
-      nameProd: prodName,
-      amount: Number(requestAmount),
-      price: price,
-      state: "PENDIENTE",
-      idAlma: almaId
-    }])
-
-  }
 
   const findByIdRecep = (idRecep: string) => {
-
+    
     history.push('/page/controlarRecepcion/' + idRecep);
   }
 
@@ -76,10 +63,10 @@ const ControlarRecepcion: React.FC = () => {
     let response = await controlarRecep(request);
     if (response.Recepcion.estadoRecep == "DIFERENCIAS") {
       confirmation();
-      setListProds(null);
+      
     } else {
       history.push('/page/recepciones');
-      setListProds(null);
+      
     }
 
 

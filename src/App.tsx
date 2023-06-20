@@ -29,6 +29,7 @@ import ControlarRecepcion from './pages/recepciones/ControlarRecepcion';
 import ProvList from './pages/proveedores/ProvList';
 import GeterarEtiqueta from './pages/products/GenerarEtiquetas';
 import ProveedorEdit from './pages/proveedores/ProveedorEdit';
+import ProductosEnPedido from './pages/products/ProductosEnPedido';
 
 setupIonicReact();
 
@@ -48,6 +49,7 @@ const routes = [
   { path: "/page/controlarRecepcion/:id", exact: true, component: <ControlarRecepcion /> },
   { path: "/page/proveedores", exact: true, component: <ProvList /> },
   { path: "/page/barcode", exact: true, component: <GeterarEtiqueta /> },
+  { path: "/page/pedido", exact: true, component: <ProductosEnPedido /> },
   { path: "/page/proveedoresnew", exact: true, component: <ProveedorEdit /> }
 ];
 

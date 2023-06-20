@@ -7,6 +7,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale } from 'chart.js';
 import ProductosEnVenta from './ProductosEnVenta';
 import LinesChart from './GraphicsComponent/LinesChar';
+import { addCircleSharp, analyticsSharp, cartSharp, cubeSharp } from 'ionicons/icons';
 import './Card.css';
 import Card from './GraphicsComponent/Card';
 const VentasReport: React.FC = () => {
@@ -25,9 +26,9 @@ const VentasReport: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div className="card-container">
-          <Card title="Ventas" />
-          <Card title="Productos" />
-          <Card title="Beneficio" />
+          <Card title="Ventas" iconCard={cartSharp}/>
+          <Card title="Productos" iconCard={cubeSharp}/>
+          <Card title="Beneficio" iconCard={analyticsSharp}/>
         </div>
       </IonContent>
     </IonPage >

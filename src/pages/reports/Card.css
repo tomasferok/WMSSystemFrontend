@@ -1,14 +1,14 @@
-.container {
+.cardIcons {
   display: flex;
-  justify-content: space-between;
-  padding: 16px;
-  
+  justify-content: center;
+  align-items: center;
+  font-size: 36px; /* Ajusta el tamaño del icono según tus necesidades */
 }
 
 .card {
-  width: 200px;
-  height: 200px;
-  background-color: rgb(209, 55, 55);
+  width: 250px; /* Ajusta el ancho de la tarjeta según tus necesidades */
+  height: 250px; /* Ajusta la altura de la tarjeta según tus necesidades */
+  background-color: transparent;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
@@ -25,4 +25,11 @@
   font-size: 18px;
   font-weight: bold;
   text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 10px; /* Ajusta el espacio entre las tarjetas según tus necesidades */
 }

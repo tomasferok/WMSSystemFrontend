@@ -5,13 +5,14 @@ import React from 'react';
 
 interface CardProps {
   title: string;
+  iconCard: string;
 }
 
-const Card: React.FC<CardProps> = ({ title }) => {
+const Card: React.FC<CardProps> = ({ title, iconCard }) => {
   return (
     <div className="card">
     <h2 className="card-title">{title}</h2>
-    <IonIcon className='cardIcons' icon={cartSharp}></IonIcon>
+    <IonIcon className='cardIcons' icon={iconCard}></IonIcon>
   </div>
   );
 };

@@ -9,11 +9,11 @@ interface RouteParams {
   name: string;
 }
 
-const ProductosPendientesList: React.FC = () => {
+const ProductosEnPedido: React.FC = () => {
   const [productos, setProductos] = useState<Product[]>([]);
   const { name } = useParams<RouteParams>();
   const history = useHistory();
-  const filteredProds: Product[] = productos?.filter(p => p.state === "PENDIENTE");
+  const filteredProds: Product[] = productos?.filter(p => p.state === "PEDIDO");
 
   useEffect(() => {
     search();
@@ -53,7 +53,7 @@ const ProductosPendientesList: React.FC = () => {
         <IonContent>
           <IonCard>
             <IonToolbar>
-              <IonTitle>Productos Pendientes</IonTitle>
+              <IonTitle>Productos En Pedido</IonTitle>
             </IonToolbar>
             <IonGrid className="table">
               <IonRow>
@@ -85,4 +85,4 @@ const ProductosPendientesList: React.FC = () => {
   );
 };
 
-export default ProductosPendientesList;
+export default ProductosEnPedido;

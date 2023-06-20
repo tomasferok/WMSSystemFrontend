@@ -1,7 +1,7 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
-import { add, close, pencil } from 'ionicons/icons';
+import { add, close, eye, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { removeAlma, searchAlma } from './AlmacenamientoApi';
 
@@ -79,7 +79,7 @@ const [almas, setAlma] = useState<Almacenamiento[]>([]);
                   <IonCol>
                     <IonButton color="primary" fill="clear" onClick={()=> editAlma(String(alma.id))}
                      >
-                      <IonIcon icon={pencil} slot="icon-only" />
+                      <IonIcon icon={eye} slot="icon-only" />
                     </IonButton>
                     <IonButton color="danger" fill="clear"
                       onClick={() => remove(String(alma.id))}>
