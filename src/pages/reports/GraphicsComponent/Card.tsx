@@ -1,21 +1,18 @@
+import { IonButton, IonIcon } from '@ionic/react';
+import { addCircleSharp, cartSharp } from 'ionicons/icons';
 import React from 'react';
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
+
 
 interface CardProps {
   title: string;
-  value: number;
 }
 
-const Card: React.FC<CardProps> = ({ title, value }) => {
+const Card: React.FC<CardProps> = ({ title }) => {
   return (
-    <IonCard>
-      <IonCardHeader>
-        <IonCardTitle>{title}</IonCardTitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <p>{value}</p>
-      </IonCardContent>
-    </IonCard>
+    <div className="card">
+    <h2 className="card-title">{title}</h2>
+    <IonIcon className='cardIcons' icon={cartSharp}></IonIcon>
+  </div>
   );
 };
 

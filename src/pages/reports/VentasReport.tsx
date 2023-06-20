@@ -25,9 +25,9 @@ const VentasReport: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div className="card-container">
-          <Card title="Ventas" value={500} />
-          <Card title="Productos" value={100} />
-          <Card title="Beneficio" value={200} />
+          <Card title="Ventas" />
+          <Card title="Productos" />
+          <Card title="Beneficio" />
         </div>
       </IonContent>
     </IonPage >

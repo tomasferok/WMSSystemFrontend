@@ -28,7 +28,7 @@ const [provs, setprovs] = useState<Product[]>([]);
   }
 
   const addProv = () => {
-    history.push('/page/product/new');
+    history.push('/page/proveedores/new');
   }
   const verPendientes = () => {
     history.push('/page/provs/pendiente');
@@ -65,9 +65,9 @@ const [provs, setprovs] = useState<Product[]>([]);
             </IonToolbar>
             <IonItem>
             
-              <IonButton onClick={addProv} color="primary" fill="solid" slot="end" size="default">
+              <IonButton onClick={addProv} className='add-recepcion' fill="solid" slot="end" size="default">
                 <IonIcon icon={add} />
-                Add Product
+                Agregar Proveedor
               </IonButton>
             </IonItem>
 

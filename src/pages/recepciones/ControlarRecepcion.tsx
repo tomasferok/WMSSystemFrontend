@@ -71,7 +71,7 @@ const ControlarRecepcion: React.FC = () => {
 
     let request: ControlarRecepcionRequest = {
       idRecep: id,
-      listProds: listProds
+      listProds: recepcion.listaProds
     };
     let response = await controlarRecep(request);
     if (response.Recepcion.estadoRecep == "DIFERENCIAS") {
@@ -96,7 +96,7 @@ const cancelConfirmation = () =>{
 const confirmSaveWithDifer = async() =>{
       let request: ControlarRecepcionRequest = {
         idRecep: id,
-        listProds: listProds
+        listProds: recepcion.listaProds
       };
       await guardarConDiferencias(request);
       history.push('/page/recepciones');
@@ -143,7 +143,9 @@ const confirmSaveWithDifer = async() =>{
                   <IonCol>{producto.price}</IonCol>
                   <IonCol>{producto.idAlma}</IonCol>
                   <IonCol>{producto.amount}</IonCol>
-                  <IonCol><IonInput placeholder='Ingresar cantidad esperada' onIonChange={e => { chargeRequest(producto.nameProd, String(e.target.value), producto.idProd, producto.price, producto.idAlma) }}></IonInput></IonCol>
+                  <IonCol><IonInput placeholder='Ingresar cantidad esperada'
+                   onIonChange={e => producto.amount = Number(e.detail.value)}
+                   ></IonInput></IonCol>
 
                 </IonRow>
               )}
