@@ -30,11 +30,9 @@ const [provs, setprovs] = useState<Product[]>([]);
   const addProv = () => {
     history.push('/page/proveedores/new');
   }
-  const verPendientes = () => {
-    history.push('/page/provs/pendiente');
-  }
-  const editProduct = (id: string) => {
-    history.push('/page/product/' + id);
+  
+  const editProv = (id: string) => {
+    history.push('/page/proveedores/' + id);
   }
   return (
     <IonPage>
@@ -85,7 +83,7 @@ const [provs, setprovs] = useState<Product[]>([]);
                   <IonCol>{prov.contacto}</IonCol>
                   <IonCol>{prov.email}</IonCol>
                   <IonCol>
-                    <IonButton color="primary" fill="clear" onClick={()=> editProduct(String(prov.idProv))}
+                    <IonButton color="primary" fill="clear" onClick={()=> editProv(String(prov.idProv))}
                      >
                       <IonIcon icon={pencil} slot="icon-only" />
                     </IonButton>

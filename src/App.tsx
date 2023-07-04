@@ -50,7 +50,7 @@ const routes = [
   { path: "/page/proveedores", exact: true, component: <ProvList /> },
   { path: "/page/barcode", exact: true, component: <GeterarEtiqueta /> },
   { path: "/page/pedido", exact: true, component: <ProductosEnPedido /> },
-  { path: "/page/proveedoresnew", exact: true, component: <ProveedorEdit /> }
+  { path: "/page/proveedores/:id", exact: true, component: <ProveedorEdit /> }
 ];
 
 const App: React.FC = () => {

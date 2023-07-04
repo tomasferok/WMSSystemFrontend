@@ -9,16 +9,29 @@ import ComboBoxProveedores from "./ComboBoxProveedores";
 
 const ProveedorEdit: React.FC = () => {
 const [prov, setProv] = useState<Proveedor>({});
+const history = useHistory();
 
+  const routeMatch: any = useRouteMatch("/page/proveedores/:id");
+  const id = routeMatch?.params?.id;
   useEffect(() => {
     
 
   }, []);
+
+  const search = async()=>{
+
+    if(id === "new"){
+      setProv({});
+    }
+
+    let result = await searchProvById(id);
+    setProv(result);
+  }
   
   const save = async () => {
     
     await saveProv(prov);
-    
+    history.push('/page/proveedores');
   }
   return (
     <IonPage>
@@ -45,7 +58,7 @@ const [prov, setProv] = useState<Proveedor>({});
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">NameProd </IonLabel> 
+                  <IonLabel position="stacked">Contacto </IonLabel> 
                   <IonInput placeholder="Se debe ingresar un contacto" onIonChange={e => prov.contacto = String(e.target.value)}
                   value={prov.contacto}/>
                 </IonItem>
@@ -54,7 +67,7 @@ const [prov, setProv] = useState<Proveedor>({});
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">Precio</IonLabel>
+                  <IonLabel position="stacked">Documento</IonLabel>
                   <IonInput placeholder="Se debe ingresar un documento" onIonChange={e => prov.documento = Number(e.target.value)}
                   value={prov.documento}/>
                 </IonItem>
@@ -63,7 +76,7 @@ const [prov, setProv] = useState<Proveedor>({});
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">Cantidad</IonLabel>
+                  <IonLabel position="stacked">Nombre</IonLabel>
                   <IonInput placeholder="Se debe ingresar un nombre" onIonChange={e => prov.nombreProv = String(e.target.value)}
                   value={prov.nombreProv}/>
                 </IonItem>
@@ -72,7 +85,7 @@ const [prov, setProv] = useState<Proveedor>({});
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="stacked">IdAlmacenamiento</IonLabel>
+                  <IonLabel position="stacked">email</IonLabel>
                   <IonInput placeholder="Se debe ingresar un nombre" onIonChange={e => prov.email = String(e.target.value)}
                   value={prov.email}/>
                 </IonItem>

@@ -1,11 +1,8 @@
 /* Estilos generales */
-ion-menu.md ion-content {
-  --padding-start: 8px;
-  --padding-end: 0px;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
-  --ion-background-color: #616161; /* Fondo degradado rojo claro */
-  width: 80%; /* Reducción del ancho del menú */
+ion-menu{
+  
+  --ion-background-color: #5c5b5b; /* Fondo degradado rojo claro */
+  width: 20%; /* Reducción del ancho del menú */
   animation: slideIn 0.5s; /* Animación de desplazamiento */
 }
 

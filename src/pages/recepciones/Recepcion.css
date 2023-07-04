@@ -11,9 +11,7 @@ ion-header {
   }
   
   /* Estilos para el contenido */
-  ion-content {
-    --ion-background-color: #f1f1f1; /* Fondo gris claro */
-  }
+ 
   
   /* Estilos para el título */
   ion-header ion-title {

@@ -84,13 +84,12 @@ const Menu: React.FC = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay">
+    <IonMenu contentId="main">
       <IonContent>
         <IonList id="inbox-list" lines="none">
           <IonListHeader>
             iLog <img className="logo" src="src/images/logo.png" alt="This is a test" />
           </IonListHeader>
-          <IonNote>Tomas Fernandez</IonNote>
         </IonList>
 
         <IonList id="labels-list" lines="none">
@@ -105,7 +104,7 @@ const Menu: React.FC = () => {
                 detail={false}
               >
                 <IonIcon slot="start" icon={appPage.icon} />
-                <IonLabel>{appPage.title}</IonLabel>
+                <IonLabel color={'light'}>{appPage.title}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           ))}
@@ -123,7 +122,7 @@ const Menu: React.FC = () => {
                 detail={false}
               >
                 <IonIcon slot="start" icon={appPage.icon} />
-                <IonLabel>{appPage.title}</IonLabel>
+                <IonLabel color={'light'}>{appPage.title}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           ))}
@@ -141,7 +140,7 @@ const Menu: React.FC = () => {
                 detail={false}
               >
                 <IonIcon slot="start" icon={appPage.icon} />
-                <IonLabel>{appPage.title}</IonLabel>
+                <IonLabel color={'light'}>{appPage.title}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           ))}
